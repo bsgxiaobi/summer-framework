@@ -88,8 +88,9 @@ public class ResourceResolver {
      * @return
      */
     ClassLoader getContextClassLoader() {
+        ClassLoader contextClassLoader = null;
         //首先从Thread.getContextClassLoader()获取，如果获取不到，再从当前Class获取，因为Web应用的ClassLoader不是JVM提供的基于Classpath的
-        ClassLoader contextClassLoader = Thread.currentThread().getContextClassLoader();
+        contextClassLoader = Thread.currentThread().getContextClassLoader();
         if(contextClassLoader == null){
             contextClassLoader = getClass().getClassLoader();
         }
