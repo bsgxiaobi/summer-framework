@@ -56,7 +56,7 @@ public class YamlUtils {
         for (String key : sourceMap.keySet()) {
             Object value = sourceMap.get(key);
             if (value instanceof Map) {
-                // 如果是map，则递归
+                // 如果是map，则递归解析出子级
                 Map<String, Object> subMap = (Map<String, Object>) value;
                 convertTo(subMap, prefix + key + ".", plainMap);
             } else if (value instanceof List) {

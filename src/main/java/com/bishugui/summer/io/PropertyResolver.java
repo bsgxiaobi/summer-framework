@@ -82,6 +82,12 @@ public class PropertyResolver {
         }
     }
 
+    /**
+     * 获取属性
+     * @param key 键名
+     * @param defaultValue 默认值不支持组合嵌套表达式，如jdbc:mysql//${DB_HOST:localhost}:${DB_PORT:3306}/${DB_NAME}
+     * @return
+     */
     @Nullable
     public String getProperty(String key,@Nullable String defaultValue){
         String value = this.propertyMap.get(key);
@@ -94,6 +100,14 @@ public class PropertyResolver {
         String value = this.propertyMap.get(key);
         if(value == null){
             return null;
+        }
+        return convert(targetClass,value);
+    }
+
+    public <T> T getProperty(String key,Class<T> targetClass,T defaultValue){
+        String value = this.propertyMap.get(key);
+        if(value == null){
+            return defaultValue;
         }
         return convert(targetClass,value);
     }
@@ -159,6 +173,6 @@ public class PropertyResolver {
         // 有默认值,先截取出key,然后将defaultValue再次解析，以实现嵌套表达式
         String keyStr = key.substring(2,colonIndex);
         String defaultValue = key.substring(colonIndex+1,key.length()-1);
-        return new PropertyExpr(keyStr,parsePropertyExpr(defaultValue).defaultValue());
+        return new PropertyExpr(keyStr,defaultValue);
     }
 }
