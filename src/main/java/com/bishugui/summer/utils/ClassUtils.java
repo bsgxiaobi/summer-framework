@@ -3,6 +3,7 @@ package com.bishugui.summer.utils;
 import com.bishugui.summer.annotation.Bean;
 import com.bishugui.summer.annotation.Component;
 import com.bishugui.summer.exception.BeanDefinitionException;
+import jakarta.annotation.Nullable;
 
 import java.lang.annotation.Annotation;
 import java.lang.reflect.Method;
@@ -56,6 +57,20 @@ public class ClassUtils {
             }
         }
         return annotation;
+    }
+
+    /**
+     * 从指定注解数组中获取指定注解
+     */
+    @Nullable
+    @SuppressWarnings("unchecked")
+    public static <T extends Annotation> T getAnnotation(Annotation[] annos, Class<T> annoClass) {
+        for (Annotation anno : annos) {
+            if (annoClass.isInstance(anno)) {
+                return (T) anno;
+            }
+        }
+        return null;
     }
 
     /**

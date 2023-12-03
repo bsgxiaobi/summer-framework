@@ -163,7 +163,7 @@ public class BeanDefinition implements Comparable<BeanDefinition>{
 
     public Object getRequiredInstance() {
         if (this.instance == null) {
-            throw new BeanCreationException(String.format("Instance of bean with name '%s' and type '%s' is not instantiated during current stage.",
+            throw new BeanCreationException(String.format("bean未实例化; Instance of bean with name '%s' and type '%s' is not instantiated during current stage.",
                     this.getName(), this.getBeanClass().getName()));
         }
         return this.instance;

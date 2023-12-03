@@ -12,6 +12,7 @@ import java.util.function.Function;
 /**
  * @author bi shugui
  * @description 属性解析器
+ * 实现IoC容器-实现PropertyResolver
  * @date 2023/9/27 21:01
  */
 public class PropertyResolver {

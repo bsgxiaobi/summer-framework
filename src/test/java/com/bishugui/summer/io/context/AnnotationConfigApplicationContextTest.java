@@ -30,15 +30,19 @@ import static org.junit.jupiter.api.Assertions.*;
  */
 public class AnnotationConfigApplicationContextTest {
 
-    @Test
-    public void AnnotationConfigApplicationContext(){
+    private PropertyResolver getPropertyResolver(){
         // 先加载基本数据
         Map<String, Object> loadYamlAsPlainMap = YamlUtils.loadYamlAsPlainMap("application.yaml");
         Properties properties = new Properties();
         properties.putAll(loadYamlAsPlainMap);
-        PropertyResolver propertyResolver = new PropertyResolver(properties);
-
-        AnnotationConfigApplicationContext context = new AnnotationConfigApplicationContext(ScanBeanDefinitionApplication.class,propertyResolver);
+        return new PropertyResolver(properties);
+    }
+    /**
+     * 测试 创建BeanDefinition
+     */
+    @Test
+    public void testCreateBeanDefinition(){
+        AnnotationConfigApplicationContext context = new AnnotationConfigApplicationContext(ScanBeanDefinitionApplication.class,getPropertyResolver(),true);
 
         // component scan 扫描
         assertNotNull(context.findBeanDefinition("sub1"));
@@ -74,5 +78,13 @@ public class AnnotationConfigApplicationContextTest {
         // 测试destroy
         assertNotNull(context.findBeanDefinition(AnnotationDestroyBean.class));
 
+    }
+
+    /**
+     * 测试创建Bean实例
+     */
+    @Test
+    public void testCreateBeanInstance(){
+        AnnotationConfigApplicationContext context = new AnnotationConfigApplicationContext(ScanBeanDefinitionApplication.class,getPropertyResolver());
     }
 }

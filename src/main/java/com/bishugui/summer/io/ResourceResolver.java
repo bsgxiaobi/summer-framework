@@ -21,6 +21,7 @@ import java.util.function.Function;
 /**
  * @author bi shugui
  * @description 资源解析器，一个简单的类路径扫描在目录和jar中都有效
+ * 实现IoC容器-实现ResourceResolver
  * @date 2023/9/17 23:30
  */
 public class ResourceResolver {
