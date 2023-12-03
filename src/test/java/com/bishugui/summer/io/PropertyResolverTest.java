@@ -1,10 +1,12 @@
 package com.bishugui.summer.io;
 
+import com.bishugui.summer.utils.YamlUtils;
 import org.junit.jupiter.api.Test;
 
 import java.time.Duration;
 import java.time.LocalDateTime;
 import java.time.LocalTime;
+import java.util.Map;
 import java.util.Properties;
 
 import static java.time.LocalTime.*;
@@ -56,5 +58,15 @@ class PropertyResolverTest {
 
         // 测试嵌套表达式
         assertEquals("title1", pr.getProperty("${app.a}","${app.title1:title1}"));
+    }
+
+    @Test
+    void testPropertyFile(){
+        Map<String, Object> yamlToPlainMap = YamlUtils.loadYamlAsPlainMap("application.yaml");
+        var props = new Properties();
+        props.putAll(yamlToPlainMap);
+        var pr = new PropertyResolver(props);
+
+        assertEquals("Summer Framework", pr.getProperty("${summer.app-desc}"));
     }
 }

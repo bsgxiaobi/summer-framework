@@ -4,7 +4,7 @@ app:
 
 # standard structure for datasource, mail, etc:
 summer:
-  app-desc: summer-${app.title}
+  app-desc: ${app.title}
   datasource:
     url: jdbc:hsqldb:file:testdb.tmp
     username: sa

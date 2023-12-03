@@ -60,6 +60,7 @@ public class ResourceResolver {
             if (uri.toString().startsWith("file:")) {
                 // 如果是文件，则先去除“file:”
                 uriBaseStr = uriBaseStr.substring(5);
+                uriBaseStr = removeLeadingSlash(uriBaseStr);
                 // 在目录中搜索
                 scanFile(false, uriBaseStr, Paths.get(uri), collector, mapper);
                 continue;
